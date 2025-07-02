@@ -1,33 +1,31 @@
 # Typst as Library
 
-This repository shows how to use [typst](https://github.com/typst/typst) as a library in Rust.
-Any code presented in this repository is meant to help you understand how to interface with `typst`.
-Please use the code as you like.
+Check out the original [tfachmann/typst-as-library](https://github.com/tfachmann/typst-as-library).
 
-```rust
-fn main() {
-    let content = "= Hello, World!";
+Quote from its README:
 
-    // All the abstraction needed is here (!)
-    let world = TypstWrapperWorld::new("./examples".to_owned(), content.to_owned());
+> This repository shows how to use [typst](https://github.com/typst/typst) as a library in Rust.
+> Any code presented in this repository is meant to help you understand how to interface with `typst`.
+> Please use the code as you like.
 
-    // Render document
-    let document = typst::compile(&world)
-        .output
-        .expect("Error compiling typst");
+## This fork: Minimal example
 
-    // Output to pdf
-    let pdf = typst_pdf::pdf(&document, &PdfOptions::default()).expect("Error exporting PDF");
-    fs::write("./output.pdf", pdf).expect("Error writing PDF.");
-}
+The goal of this fork is to simply render a "Hello, World!" string with typst. For that, we don't need
+some of the functionality which is implemented in the original `typst-as-library`, e.g., system fonts,
+loading plugins from an online source,
+and mainly that the inclusion of typst files works.
+
+Instead a binary crate is provided, which lets you compile a document start-to-finish by simply running
+
 ```
-
-Check the [example](https://github.com/tfachmann/typst-as-library/tree/main/examples/native) for more information.
+cargo run
+```
 
 ---
 
 ## Acknowledgment
 
 Code has been inspired by
+- [https://github.com/tfachmann/typst-as-library](https://github.com/tfachmann/typst-as-library).
 - [https://github.com/fenjalien/obsidian-typst](https://github.com/fenjalien/obsidian-typst)
 - [https://github.com/mattfbacon/typst-bot](https://github.com/mattfbacon/typst-bot)
